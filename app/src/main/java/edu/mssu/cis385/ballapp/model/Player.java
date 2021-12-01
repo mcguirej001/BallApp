@@ -8,9 +8,9 @@ public class Player {
         this.player = player;
     }
 
-    //public void setPlayer (String player) {
-    //    this.player = player;
-    //}
+    public void setText (String player) {
+       this.player = player;
+    }
 
     public String getText() {
         return player;

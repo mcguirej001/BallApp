@@ -20,7 +20,7 @@ import edu.mssu.cis385.ballapp.model.Player;
 public class ImportActivity extends AppCompatActivity {
 
     private LinearLayout mSubjectLayoutContainer;
-    private StudyFetcher mStudyFetcher;
+    private StatFetcher mStatFetcher;
     private ProgressBar mLoadingProgressBar;
 
     @Override
@@ -37,12 +37,12 @@ public class ImportActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
-        mStudyFetcher = new StudyFetcher(this);
-        mStudyFetcher.fetchPlayers(mFetchListener, message);
+        mStatFetcher = new StatFetcher(this);
+        mStatFetcher.fetchPlayers(mFetchListener, message);
     }
 
-    private final StudyFetcher.OnStudyDataReceivedListener mFetchListener =
-            new StudyFetcher.OnStudyDataReceivedListener() {
+    private final StatFetcher.OnStatDataReceivedListener mFetchListener =
+            new StatFetcher.OnStatDataReceivedListener() {
 
                 @Override
                 public void onPlayersReceived(List<Player> playerList) {

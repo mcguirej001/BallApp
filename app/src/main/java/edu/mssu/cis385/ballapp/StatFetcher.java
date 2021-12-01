@@ -19,17 +19,17 @@ import java.util.List;
 import edu.mssu.cis385.ballapp.model.Player;
 
 
-public class StudyFetcher {
+public class StatFetcher {
 
     // (Component #1 in the slides)
     // "manages worker threads that make HTTP requests and parse HTTP responses"
     private final RequestQueue mRequestQueue;
 
-    public StudyFetcher(Context context) {
+    public StatFetcher(Context context) {
         mRequestQueue = Volley.newRequestQueue(context);
     }
 
-    public interface OnStudyDataReceivedListener {
+    public interface OnStatDataReceivedListener {
         void onPlayersReceived(List<Player> playerList);
         void onErrorResponse(VolleyError error);
     }
@@ -37,7 +37,7 @@ public class StudyFetcher {
     private final String WEBAPI_BASE_URL = "https://www.balldontlie.io/api/v1/players.php";
     private final String TAG = "PlayerFetcher";
 
-    public void fetchPlayers(final OnStudyDataReceivedListener listener, String search) {
+    public void fetchPlayers(final OnStatDataReceivedListener listener, String search) {
 
         // Our full URL is https://wp.zybooks.com/study-helper.php?type=players
         // Uri.parse(WEBAPI_BASE_URL) is https://wp.zybooks.com/study-helper.php
@@ -51,7 +51,7 @@ public class StudyFetcher {
                 // Component #3 in the slides
                 response -> listener.onPlayersReceived(jsonToPlayers(response)),
                 // Component #5 in the slides
-                error -> listener.onErrorResponse(error));
+                listener::onErrorResponse);
 
         mRequestQueue.add(request);
     }
